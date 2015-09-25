@@ -1,0 +1,7 @@
+
+search location based on multiple location preferences
+add contract terms - load dynamically with a facet query into a series of check boxes
+salary filter
+
+Url's to profiles: 
+    http://employer.dice.com/ows/integratedProfile.html?dockey=80f7d2e499e11c92e3280e85bb38db83&icid=ISearchIntegratedProfile

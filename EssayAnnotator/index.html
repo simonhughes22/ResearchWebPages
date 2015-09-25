@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Essay Annotator</title>
+        <meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+        <!-- CSS styles for standard search box -->
+        
+        <link rel="stylesheet" type="text/css" href="../Libs/chosen.css">
+        <link rel="stylesheet" type="text/css" href="../Libs/nv.d3.min.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <!-- for auto complete -->
+        <link rel="stylesheet" href="./jquery-ui-smoothness.css">
+        
+        <link rel="stylesheet" type="text/css" href="../Libs/jquery-ui-1.11.0.custom/jquery-ui.min.css">
+        <link rel="stylesheet" type="text/css" href="../Libs/jquery-ui-1.11.0.custom/jquery-ui.structure.min.css">
+        <link rel="stylesheet" type="text/css" href="../Libs/jquery-ui-1.11.0.custom/jquery-ui.theme.min.css">
+        
+    </head>
+    <body>
+        <!-- SEARCH BAR -->
+        <div id="tfheader" class="header" >
+            <h1 style="color:white;">READi Essay Annotator</h1>
+        </div>
+        <div class="left" style="width:45%; padding:10px; font-family: calibri, courier, arial;">
+            <textarea id="essayText" rows=20 style="height:100%; width:100%; font-size:16pt;">Please enter essay text here.</textarea>
+        </div>
+        <div class="left" style="50">
+            &nbsp;
+        </div>
+    </body>
+
+    <script src="../Libs/knockout-3.1.0.js"></script>
+    <script src="../Libs/jquery-1.11.1.min.js"></script>
+    
+    <script src="../Libs/jquery-ui-1.11.0.custom/jquery-ui.min.js"></script>
+    
+    <script src="../Libs/functional.js"></script>
+    <script src="../Libs/strings.js"></script>    
+    <script src="../Libs/math.js"></script>
+            
+    <script src="../Libs/chosen.jquery.js"></script>
+    
+    <script src="./settings.js"></script>
+
+    <!-- depends on execute ... query from above -->
+    <script src="./viewModel.js"></script>
+    <script src="./requestHandler.js"></script>
+    <script src="./main.js"></script>
+
+</html>
