@@ -5,15 +5,10 @@
         <meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
         <!-- CSS styles for standard search box -->
         
-        <link rel="stylesheet" type="text/css" href="../Libs/chosen.css">
-        <link rel="stylesheet" type="text/css" href="../Libs/nv.d3.min.css">
         <link rel="stylesheet" type="text/css" href="styles.css">
         <!-- for auto complete -->
-        <link rel="stylesheet" href="./jquery-ui-smoothness.css">
         
-        <link rel="stylesheet" type="text/css" href="../Libs/jquery-ui-1.11.0.custom/jquery-ui.min.css">
-        <link rel="stylesheet" type="text/css" href="../Libs/jquery-ui-1.11.0.custom/jquery-ui.structure.min.css">
-        <link rel="stylesheet" type="text/css" href="../Libs/jquery-ui-1.11.0.custom/jquery-ui.theme.min.css">
+        <link rel="stylesheet" type="text/css" href="svg_styles.css">
         
     </head>
     <body>
@@ -22,7 +17,7 @@
             <h1 style="color:white;">READi Essay Annotator</h1>
         </div>
         <div class="left" style="width:70%; padding:10px; font-family: calibri, courier, arial;">
-            <textarea id="essayText" rows=15 style="height:100%; width:100%; font-size:14pt;">
+            <textarea class="rounded" oncut="textChanged" id="essayText" rows=15 style="height:100%; width:100%; font-size:14pt;">
 The part of coral called "zooanthellae" are not getting sunlight.
 And if they don't get or much sunlight they start to losse their color.
 The reason why is because the "zooanthellae." if not getting mixed up with carbon dioxide./
@@ -32,20 +27,15 @@ Also the water us getting to salty. //
             </textarea>
         </div>
         <div class="left" style="width:28%">
-            <div class="indent">
-                <div class="label padded padTop">Summary</div>
+            <div class="indent" data-bind="visible: error() ==''">
+                <div class="label padded padTop">Category</div>
                 <div class="indent">
-                    <svg class="left" height="15" width="15" style="height:65px; width:325px; background-color:transparent">                                
-                        <!-- ko foreach: [1,2,3,4,5] -->
-                        <circle data-bind="attr: { cx: 62*$data-30 }" cy="32" r="30" 
-                                fill="#fff" 
-                                stroke="#0066CC"
-                                stroke-width="2" style="opacity:0.6"></circle>
-                        <text data-bind="attr: { dx: 62*$data-30 }" dy=32 data-bind="html:$data"></text>
-                        <!-- /ko -->
+                    <div class="padTop" data-bind="html: quote(categoryDescription(category()))"></div>
+                    <svg class="left padTop">
                     </svg>
-                    <div class="clear"></div>
+                    <div class="clear"></div>                    
                 </div>
+                
             </div>
         </div>
         <div class="" style="width:95%">
@@ -53,17 +43,15 @@ Also the water us getting to salty. //
         </div>
     </body>
 
+    <script src="../Libs/d3.v3.min.js"></script>
+    
     <script src="../Libs/knockout-3.1.0.js"></script>
     <script src="../Libs/jquery-1.11.1.min.js"></script>
-    
-    <script src="../Libs/jquery-ui-1.11.0.custom/jquery-ui.min.js"></script>
-    
+        
     <script src="../Libs/functional.js"></script>
     <script src="../Libs/strings.js"></script>    
     <script src="../Libs/math.js"></script>
             
-    <script src="../Libs/chosen.jquery.js"></script>
-    
     <script src="./settings.js"></script>
 
     <script src="./draw_circles.js"></script>

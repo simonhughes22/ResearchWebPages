@@ -6,23 +6,33 @@ if(!window.console){
     window.console = console;
 }
 
-$(document).ready(function(){
+function quote(s){
+    return "\"" + s + "\"";
+}
 
+$(document).ready(function(){
+    
+    var DELAY = 250;
+    
     var loaded = false;
     
     var viewModel = createViewModel();
     ko.applyBindings(viewModel);
     
     function doAnnotate(){
+        console.log("do annotate");
         viewModel.text($("#essayText").val());
         annotate(viewModel);
     }
     
-    var timerVal = {}
-    $('#essayText').bind('input propertychange', function() {
+    function textChanged(){
+        console.log("text changed");
         clearTimeout(timerVal);
-        timerVal = setTimeout(doAnnotate, 2000);
-    });
+        timerVal = setTimeout(doAnnotate, DELAY);
+    }
     
-    doAnnotate();
+    var timerVal = {}
+    $('#essayText').bind('input propertychange', textChanged);
+    
+    doAnnotate();    
 });
