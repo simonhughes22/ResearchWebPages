@@ -13,12 +13,16 @@ $(document).ready(function(){
     var viewModel = createViewModel();
     ko.applyBindings(viewModel);
     
+    function doAnnotate(){
+        viewModel.text($("#essayText").val());
+        annotate(viewModel);
+    }
+    
     var timerVal = {}
     $('#essayText').bind('input propertychange', function() {
-        
-        viewModel.text($("#essayText").val());
         clearTimeout(timerVal);
-        timerVal = setTimeout(function(){annotate(viewModel);}, 2000);        
+        timerVal = setTimeout(doAnnotate, 2000);
     });
-
+    
+    doAnnotate();
 });

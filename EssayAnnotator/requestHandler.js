@@ -5,7 +5,7 @@ function annotate(vm){
     }
 
     vm.querying(true);
-    //var url = endpoint + "AnnotateEssays?text=" + vm.text();
+
     var url = endpoint + "AnnotateEssays";
     $.getJSON(url, {
         text: vm.text()

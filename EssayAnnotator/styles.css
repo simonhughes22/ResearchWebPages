@@ -1,3 +1,8 @@
+body{
+    border: none;
+    font-size: 14pt;
+    font-family: calibri times arial;
+}
 
 textarea{
     resize: none;
@@ -69,6 +74,15 @@ textarea{
 }
 .label{
     font-weight: bold;
+    font-size: 14pt;
+}
+
+.padTop{
+    padding-top: 10px;
+}
+
+.padded{
+    padding: 5px;
 }
 
 .clear{
