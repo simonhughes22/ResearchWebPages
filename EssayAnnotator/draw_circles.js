@@ -4,8 +4,8 @@ function drawCircles(essay_category){
     var radius = 30;
     var padding = 2;
     
-    var defaultColor = "#336699"; //blue
-    var selectedColor = "#00CC66"; // green
+    var defaultColor = "#336699";  // blue
+    var selectedColor = "#336699"; // blue
     var selectedStroke = "white";
     
     var width = range.length * 2 * (radius + padding);
