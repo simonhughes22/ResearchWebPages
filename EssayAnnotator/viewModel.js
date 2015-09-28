@@ -1,13 +1,24 @@
 function createViewModel(){
+    var codesScale = d3.scale.category20();
+    var causalScale = d3.scale.category20b();
+    
     var vm = {
         
-        querying    : ko.observable(false),
-        error       : ko.observable(""),
-        text        : ko.observable(""),
+        bound         : false,
         
-        category    : ko.observable(-1),
+        querying      : ko.observable(false),
+        error         : ko.observable(""),
+        text          : ko.observable(""),
         
-        categoryDescription : function(cat){
+        getCodeColor  : function(code){
+            return codesScale(code);
+        },
+        
+        getCausalColor : function(causal){
+            return causalScale(causal);
+        },
+        
+        getCategoryDescription : function(cat){
             if(cat == 1){
                 return "No core content";
             }
@@ -26,21 +37,43 @@ function createViewModel(){
             return "";
         },
         
+        getCaption : function(tagged_word){
+            if(tagged_word.word() == tagged_word.corrected_word()){
+                return "";
+            }
+            return "Corrected from " + tagged_word.word();
+        },
+        
+        getFontStyle : function(tagged_word){
+            if(tagged_word.word() == tagged_word.corrected_word()){
+                return "normal";
+            }
+            return "italic";
+        },
+        
         update      : function(data){
-            
             console.log(data);
-            
             vm.querying(false);
-
             if(data.error){
                 vm.error(data.error);
+                return
+            }
+            vm.error("");
+            if(!vm.bound){
+                vm.bound = true;
+                var mappedVm = ko.mapping.fromJS(data);
+                vm = $.extend(vm, mappedVm);
+                ko.applyBindings(vm);
             }
             else{
-                vm.error("");
-                vm.category(data.essay_category);
-                drawCircles(vm.category());
+                ko.mapping.fromJS(data, vm);
             }
+            vm.updateAnnotations();
+        },
+        updateAnnotations : function(){
+            drawCircles(vm.essay_category());
         }
+        
 	};
     
     return vm;

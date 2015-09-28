@@ -1,13 +1,12 @@
-function annotate(vm){
-    vm.error("");
-    if(vm.querying()){
-        return;
-    }
-
-    vm.querying(true);
+function annotate(text, cb){
 
     var url = endpoint + "AnnotateEssays";
     $.getJSON(url, {
-        text: vm.text()
-    }).done(vm.update);   
+        text: text
+    }).done(cb)
+    .fail(function( jqxhr, textStatus, error ) {
+        var err = textStatus + ", " + error;
+        console.log( "Request Failed: " + err );
+        alert("Ajax error - Request Failed: " + err);
+    });  
 }

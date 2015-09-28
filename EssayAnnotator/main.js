@@ -12,27 +12,33 @@ function quote(s){
 
 $(document).ready(function(){
     
-    var DELAY = 250;
+    var DELAY = 700;
     
     var loaded = false;
+    var viewModel = createViewModel(); // is bound in update call on first callback
     
-    var viewModel = createViewModel();
-    ko.applyBindings(viewModel);
-    
-    function doAnnotate(){
+    function doAnnotate(){        
         console.log("do annotate");
         viewModel.text($("#essayText").val());
-        annotate(viewModel);
+        viewModel.error("");
+        if(viewModel.querying()){
+            return;
+        }
+        viewModel.querying(true);        
+        annotate(viewModel.text(), viewModel.update);        
     }
     
+    // EVENTS
+    var timerVal = {}
     function textChanged(){
         console.log("text changed");
         clearTimeout(timerVal);
         timerVal = setTimeout(doAnnotate, DELAY);
     }
     
-    var timerVal = {}
+    $("#essayText").bind("oncut", textChanged);
     $('#essayText').bind('input propertychange', textChanged);
     
+    // trigger on load
     doAnnotate();    
 });
