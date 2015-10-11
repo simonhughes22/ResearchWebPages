@@ -19,7 +19,7 @@
         
         <!-- TOP - LHS - Essay Text - TextArea -->        
         <div class="left" style="width:70%; padding:10px; font-family: calibri, courier, arial;">
-            <textarea id="essayText" class="rounded" rows=15 style="height:100%; width:100%; font-size:14pt;">
+            <textarea id="essayText" class="rounded" rows=15 style="height:100%; width:99%; font-size:14pt;">
 There are a couple of reasons why coral bleaching happens.
 Some of the reasons why coral bleaching happens is because of to much stress, or change in trade winds and temperature.
 Most of the coral bleaching on the planet happens in the Pacific Ocean.
@@ -27,17 +27,6 @@ The Pacific Ocean covers 1/3 of our globe, and contains more water than the Atla
 First, one of the reasons why coral bleaching may happen is because to much stress is put on them.
 When people fish, or when tourists drop anchors or to walk on the reefs, they arre putting stress on the coral.
 The coral then is forced to eject a food-producing algae.
-This as a result hurts the relationship between the coral and zooxanthellae.
-Since the coral is vunrable coral bleaching starts to happen and to disease or stravation also.
-Some reefs have recovered from coral bleaching but many have not. /
-Lastly, another possible cause of coral bleaching because the temperatute and trade winds change.
-For example in 1998 the trade winds had a major drop and were really weak.
-The temperature had also rose too.
-There was an influx or coral bleaching happening in 1998.
-According to the article Coral and Zooanthallae, "a massive coral bleaching event in 1998 is considered one of the world's worst ever observed.
-This event resulted in the death of 16% of the world's coral reefs" (1).
-In order for coral reefs to build, healthy and to thrive, the water needs to be between 70-85 degrees F.
-Ran out of time
             </textarea>
 
 <!-- My Essay -->
@@ -45,12 +34,18 @@ Ran out of time
 A decrease in trade winds causes an increase in warm waters moving east. Warm waters moving east cause and  increase in the water temperatures. Increased water temps. lower the levels of carbon dioxide in the water. Lower CO2 levels reduce the rate of photosynthesis, meaning few chemicals are available to feed the coral.
 Storms and rainfall increase the amount of fresh water. More fresh water reduces the salinity of the water. Lower salt levels threatens the balance for health of the coral. Low health balance leads to increased coral stress. Increased coral stress causes the ejection of algae. Algal death then leads to coral bleaching.
 -->
+            <div id="analyze" class="right go left rounded">
+                <span>Analyze</span>
+            </div>
         </div>
         
         <!-- TOP - RHS - Essay Summary -->
-        <div class="left" style="width:28%">
-            <div class="indent error padTop" data-bind="visible: error() !='', html: error()"></div>
-            <div class="indent" data-bind="visible: error() =='' && text() != ''">
+        <div class="left" style="width:28%;">
+            <div style="display:none;" class="indent error padTop" data-bind="visible: error() !='', html: error()"></div>
+            <div id="spinner" class="" style="display:none; margin-top:5px;" data-bind="visible: querying">
+                Analyzing, please wait... <img src="../Libs/Images/ajax-loader.gif" id="loading" style="height:20px; width:auto">
+            </div>
+            <div style="display:none;" class="indent" data-bind="visible: !querying() && error() =='' && text().trim().length > 0">
                 <div class="label padded padTop">Category</div>
                 <div class="indent">
                     <div class="" data-bind="html: quote(getCategoryDescription(essay_category()))"></div>
@@ -70,65 +65,9 @@ Storms and rainfall increase the amount of fresh water. More fresh water reduces
                     <div class="indent" data-bind="html: essay_causal">
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="clear"></div>
-        
-        <!-- Bottom - Tagged Sentences -->
-        <div style="width:95%; margin-left:10px;" class="indent padTop" data-bind="visible: error() == '' && text() != ''">
-            <div class="label padded padTop">Annotated Sentences</div>
-            <!-- sentence -->
-            <div class="left indent padTop" style="padding-right:15px; width:200px;font-weight:bold;">Concept Codes</div>
-            <div class="left padTop"  style="padding-right:15px; width:200px;font-weight:bold;">Causal Codes</div>
-            <div class="left padTop"  style="font-weight:bold;">Word Tags <i>(may not match sentence tags, spelling corrections in italics)</i></div>
-            <div class="clear"></div>
-            
-            <div class="indent" style="width:100%; " data-bind="foreach: tagged_sentences">
-                <div style="border-bottom:1px solid black; padding-bottom:5px;">
-                    
-                    <span class="" style="width:430px;">
-                        <!-- spacer -->
-                        <div class="left" style="padding-right:15px; width:200px;" data-bind="visible: $data.codes() == ''">&nbsp;
-                        </div>
-                        <!-- codes -->
-                        <div class="left" style="padding-right:15px; width:200px;" data-bind="visible: $data.codes() != '', foreach: $data.codes().split(',')">
-                            <span class="tag" data-bind="html: $data, style: { backgroundColor: $root.getCodeColor($data)}"></span>
-                        </div>
-
-                        <!-- spacer -->
-                        <div class="left" style="padding-right:15px; width:200px;" data-bind="visible: $data.causal() == ''">&nbsp;
-                        </div>
-                        <!-- causal -->
-                        <div class="left" style="padding-right:15px; width:200px; overflow: scroll; white-space:nowrap;" data-bind="visible: $data.causal() != '', foreach: $data.causal().split(',')">
-                            <span class="tag" data-bind="html: $data, style: { backgroundColor: $root.getCausalColor($data)}"></span>
-                        </div>                        
-                    </span>
-                    <div class="" style="overflow-x:scroll; overflow-y:visible; height:95px; white-space: nowrap; text-align: left;">
-                        <!-- word -->                
-                        <!-- ko foreach: $data.tagged_words -->
-                        <!-- Needed to keep the sentence together -->
-                        <div class="cell">
-                            <div class="" data-bind="html: $data.corrected_word, attr:{ title: $root.getCaption($data)}, style: { fontStyle: $root.getFontStyle($data) }"
-                                 style="text-align:center; height:30px;">
-                            </div>
-                            
-                            <div data-bind="visible: $data.codes() == ''" style="text-align:center; height:30px;">&nbsp;</div>
-                            <div data-bind="visible: $data.codes() !='', foreach: $data.codes().split(',')" style="text-align:center; height:30px;">
-                                <span class="tag" data-bind="html: $data, style: { backgroundColor: $root.getCodeColor($data)}"></span>
-                            </div>
-                            
-                            <div data-bind="visible: $data.causal() == ''" style="text-align:center; height:30px;">&nbsp;</div>
-                            <div data-bind="visible: $data.causal() !='', foreach: $data.causal().split(',')" style="text-align:center; height:30px;">
-                                <span class="tag" data-bind="html: $data, style: { backgroundColor: $root.getCausalColor($data)}"></span>
-                            </div>
-                        </div>
-                        <div class="cell">&nbsp;</div>
-                        <!-- /ko -->
-                    </div>
-                </div>   
-                <div class="clear"></div>
-            </div>
-        </div>
+            </div>            
+        </div>        
+        <div class="clear"></div>        
     </body>
 
     <script src="../Libs/d3.v3.min.js"></script>

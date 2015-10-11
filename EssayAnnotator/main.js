@@ -12,13 +12,12 @@ function quote(s){
 
 $(document).ready(function(){
     
-    var DELAY = 700;
-    
     var loaded = false;
     var viewModel = createViewModel(); // is bound in update call on first callback
     
     function doAnnotate(){        
         console.log("do annotate");
+        $("#spinner").show();
         viewModel.text($("#essayText").val());
         viewModel.error("");
         if(viewModel.querying()){
@@ -36,9 +35,10 @@ $(document).ready(function(){
         timerVal = setTimeout(doAnnotate, DELAY);
     }
     
-    $("#essayText").bind("oncut", textChanged);
-    $('#essayText').bind('input propertychange', textChanged);
-    
+    $("#analyze").click(function(){
+        // intercept as they want a prompt here at some point
+        doAnnotate();
+    });
     // trigger on load
-    doAnnotate();    
+    //doAnnotate();    
 });
